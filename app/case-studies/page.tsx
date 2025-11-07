@@ -4,7 +4,7 @@ import CaseStudyCard from '@/components/CaseStudyCard'
 
 export const metadata = {
   title: 'Case Studies - Digital Cowboys',
-  description: 'Explore our portfolio of successful projects. See how we've helped businesses transform their digital presence and achieve measurable results.',
+  description: "Explore our portfolio of successful projects. See how we've helped businesses transform their digital presence and achieve measurable results.",
 }
 
 export default async function CaseStudiesPage() {
