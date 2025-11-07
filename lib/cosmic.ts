@@ -106,3 +106,19 @@ export async function getCaseStudyBySlug(slug: string) {
     throw new Error('Failed to fetch case study');
   }
 }
+
+// Fetch about page content
+export async function getAboutPage() {
+  try {
+    const response = await cosmic.objects
+      .findOne({ type: 'about-pages' })
+      .props(['id', 'title', 'slug', 'metadata'])
+      .depth(1);
+    return response.object;
+  } catch (error) {
+    if (hasStatus(error) && error.status === 404) {
+      return null;
+    }
+    throw new Error('Failed to fetch about page');
+  }
+}
