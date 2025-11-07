@@ -86,6 +86,36 @@ export interface CaseStudy extends CosmicObject {
   };
 }
 
+// About Page interface
+export interface AboutPage extends CosmicObject {
+  type: 'about-pages';
+  metadata: {
+    hero_headline: string;
+    hero_subheadline: string;
+    hero_image?: {
+      url: string;
+      imgix_url: string;
+    };
+    story_title: string;
+    story_content: string;
+    mission_statement: string;
+    values_title: string;
+    value_1_title: string;
+    value_1_description: string;
+    value_2_title: string;
+    value_2_description: string;
+    value_3_title: string;
+    value_3_description: string;
+    value_4_title?: string;
+    value_4_description?: string;
+    stats_title?: string;
+    years_in_business?: number;
+    projects_completed?: number;
+    happy_clients?: number;
+    team_members_count?: number;
+  };
+}
+
 // API response types
 export interface CosmicResponse<T> {
   objects: T[];
