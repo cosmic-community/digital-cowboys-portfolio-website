@@ -2,9 +2,13 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { useCart } from '@/lib/cart-context'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { cart } = useCart()
+  
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0)
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -20,6 +24,9 @@ export default function Header() {
             <Link href="/" className="text-gray-700 hover:text-primary font-semibold transition-colors">
               Home
             </Link>
+            <Link href="/shop" className="text-gray-700 hover:text-primary font-semibold transition-colors">
+              Shop
+            </Link>
             <Link href="/about" className="text-gray-700 hover:text-primary font-semibold transition-colors">
               About
             </Link>
@@ -31,6 +38,16 @@ export default function Header() {
             </Link>
             <Link href="/case-studies" className="text-gray-700 hover:text-primary font-semibold transition-colors">
               Case Studies
+            </Link>
+            <Link href="/cart" className="text-gray-700 hover:text-primary font-semibold transition-colors relative">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              {cartItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-primary text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
+                  {cartItemCount}
+                </span>
+              )}
             </Link>
           </nav>
 
@@ -62,6 +79,13 @@ export default function Header() {
                 Home
               </Link>
               <Link 
+                href="/shop" 
+                className="text-gray-700 hover:text-primary font-semibold transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Shop
+              </Link>
+              <Link 
                 href="/about" 
                 className="text-gray-700 hover:text-primary font-semibold transition-colors"
                 onClick={() => setIsMenuOpen(false)}
@@ -88,6 +112,18 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Case Studies
+              </Link>
+              <Link 
+                href="/cart" 
+                className="text-gray-700 hover:text-primary font-semibold transition-colors flex items-center gap-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span>Cart</span>
+                {cartItemCount > 0 && (
+                  <span className="bg-primary text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
+                    {cartItemCount}
+                  </span>
+                )}
               </Link>
             </div>
           </nav>
