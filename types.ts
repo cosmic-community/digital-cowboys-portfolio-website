@@ -116,6 +116,75 @@ export interface AboutPage extends CosmicObject {
   };
 }
 
+// Category interface
+export interface Category extends CosmicObject {
+  type: 'categories';
+  metadata: {
+    category_name: string;
+    description?: string;
+    image?: {
+      url: string;
+      imgix_url: string;
+    };
+  };
+}
+
+// Product interface
+export interface Product extends CosmicObject {
+  type: 'products';
+  metadata: {
+    product_name: string;
+    description: string;
+    price: number;
+    compare_at_price?: number;
+    sku?: string;
+    stock_quantity: number;
+    category?: Category;
+    images?: Array<{
+      url: string;
+      imgix_url: string;
+    }>;
+    featured_image?: {
+      url: string;
+      imgix_url: string;
+    };
+    featured: boolean;
+  };
+}
+
+// Order interface
+export interface Order extends CosmicObject {
+  type: 'orders';
+  metadata: {
+    order_number: string;
+    customer_email: string;
+    customer_name: string;
+    shipping_address: string;
+    shipping_city: string;
+    shipping_state: string;
+    shipping_zip: string;
+    order_items: Array<{
+      product_id: string;
+      product_name: string;
+      quantity: number;
+      price: number;
+    }>;
+    subtotal: number;
+    tax: number;
+    shipping: number;
+    total: number;
+    status: string;
+    stripe_payment_intent_id?: string;
+    order_date: string;
+  };
+}
+
+// Cart item interface (client-side only)
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
+
 // API response types
 export interface CosmicResponse<T> {
   objects: T[];
