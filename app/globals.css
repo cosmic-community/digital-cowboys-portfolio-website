@@ -3,37 +3,65 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply border-gray-200;
+  :root {
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --secondary: #64748b;
+    --secondary-light: #cbd5e1;
+    --secondary-dark: #475569;
   }
-  
+
   body {
-    @apply bg-white text-gray-900;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
-  }
-
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-  }
-
-  h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
-  }
-
-  h3 {
-    @apply text-2xl md:text-3xl;
-  }
-
-  h4 {
-    @apply text-xl md:text-2xl;
+    @apply bg-gray-50 text-gray-900;
   }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .prose {
+    @apply text-gray-700 leading-relaxed;
+  }
+  
+  .prose h2 {
+    @apply text-3xl font-bold mt-8 mb-4 text-gray-900;
+  }
+  
+  .prose h3 {
+    @apply text-2xl font-bold mt-6 mb-3 text-gray-900;
+  }
+  
+  .prose p {
+    @apply mb-4 text-lg;
+  }
+  
+  .prose ul, .prose ol {
+    @apply mb-4 ml-6;
+  }
+  
+  .prose li {
+    @apply mb-2;
+  }
+  
+  .prose a {
+    @apply text-primary hover:text-primary-dark underline;
+  }
+  
+  .prose strong {
+    @apply font-bold text-gray-900;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-primary pl-4 italic my-4 text-gray-600;
+  }
+  
+  .prose code {
+    @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+  }
+  
+  .prose pre {
+    @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-4;
+  }
+  
+  .prose img {
+    @apply rounded-lg my-6;
   }
 }

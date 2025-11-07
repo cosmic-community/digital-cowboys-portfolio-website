@@ -116,6 +116,71 @@ export interface AboutPage extends CosmicObject {
   };
 }
 
+// Blog Post interface
+export interface Post extends CosmicObject {
+  type: 'posts';
+  metadata: {
+    post_title: string;
+    featured_image?: {
+      url: string;
+      imgix_url: string;
+    };
+    excerpt: string;
+    content: string;
+    author: Author;
+    categories?: Category[];
+    tags?: Tag[];
+    published_date: string;
+    reading_time?: number;
+    featured?: boolean;
+  };
+}
+
+// Category interface
+export interface Category extends CosmicObject {
+  type: 'categories';
+  metadata: {
+    category_name: string;
+    description?: string;
+    color?: string;
+  };
+}
+
+// Tag interface
+export interface Tag extends CosmicObject {
+  type: 'tags';
+  metadata: {
+    tag_name: string;
+  };
+}
+
+// Author interface
+export interface Author extends CosmicObject {
+  type: 'authors';
+  metadata: {
+    author_name: string;
+    profile_photo?: {
+      url: string;
+      imgix_url: string;
+    };
+    bio?: string;
+    email?: string;
+    twitter?: string;
+    linkedin?: string;
+    website?: string;
+  };
+}
+
+// Pagination interface
+export interface PaginationInfo {
+  total: number;
+  skip: number;
+  limit: number;
+  hasMore: boolean;
+  currentPage: number;
+  totalPages: number;
+}
+
 // API response types
 export interface CosmicResponse<T> {
   objects: T[];
