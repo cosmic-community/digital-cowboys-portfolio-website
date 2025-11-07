@@ -41,7 +41,7 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <p className="text-gray-400 mb-2">Get in touch to discuss your project</p>
-            <Link href="/team" className="text-primary hover:text-blue-400 transition-colors font-semibold">
+            <Link href="/team" className="text-primary hover:text-red-400 transition-colors font-semibold">
               Contact Us →
             </Link>
           </div>

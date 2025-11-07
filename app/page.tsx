@@ -19,19 +19,19 @@ export default async function HomePage() {
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
               Digital Cowboys
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100">
+            <p className="text-xl md:text-2xl mb-8 text-red-100">
               We wrangle the web to create stunning digital experiences that drive results
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/services" 
-                className="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-colors text-lg"
+                className="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-red-50 transition-colors text-lg"
               >
                 Our Services
               </Link>
               <Link 
                 href="/case-studies" 
-                className="bg-primary-dark text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-900 transition-colors text-lg border-2 border-white"
+                className="bg-primary-dark text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-900 transition-colors text-lg border-2 border-white"
               >
                 View Our Work
               </Link>
@@ -122,12 +122,12 @@ export default async function HomePage() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Ready to Start Your Project?
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-blue-100">
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-red-100">
             Let's work together to create something amazing. Get in touch to discuss your project.
           </p>
           <Link 
             href="/team"
-            className="inline-block bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-colors text-lg"
+            className="inline-block bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-red-50 transition-colors text-lg"
           >
             Meet Our Team
           </Link>
