@@ -3,7 +3,7 @@ import Stripe from 'stripe'
 import { createOrder } from '@/lib/cosmic'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2024-11-20.acacia'
+  apiVersion: '2023-10-16'
 })
 
 export async function POST(request: NextRequest) {
@@ -30,15 +30,22 @@ export async function POST(request: NextRequest) {
       price: (item.amount_total || 0) / 100 / (item.quantity || 1)
     })) || []
 
+    // Validate metadata properties and provide defaults
+    const customerName = session.metadata.customer_name || 'Unknown Customer'
+    const shippingAddress = session.metadata.shipping_address || ''
+    const shippingCity = session.metadata.shipping_city || ''
+    const shippingState = session.metadata.shipping_state || ''
+    const shippingZip = session.metadata.shipping_zip || ''
+
     // Create order in Cosmic
     const order = await createOrder({
       order_number: orderNumber,
       customer_email: session.customer_email || '',
-      customer_name: session.metadata.customer_name,
-      shipping_address: session.metadata.shipping_address,
-      shipping_city: session.metadata.shipping_city,
-      shipping_state: session.metadata.shipping_state,
-      shipping_zip: session.metadata.shipping_zip,
+      customer_name: customerName,
+      shipping_address: shippingAddress,
+      shipping_city: shippingCity,
+      shipping_state: shippingState,
+      shipping_zip: shippingZip,
       order_items: orderItems,
       subtotal: (session.amount_subtotal || 0) / 100,
       tax: ((session.amount_total || 0) - (session.amount_subtotal || 0)) / 100,
