@@ -1,230 +1,294 @@
 import { createBucketClient } from '@cosmicjs/sdk'
 
 export const cosmic = createBucketClient({
-  bucketSlug: process.env.COSMIC_BUCKET_SLUG as string,
-  readKey: process.env.COSMIC_READ_KEY as string,
-  apiEnvironment: 'staging'
+    bucketSlug: process.env.COSMIC_BUCKET_SLUG as string,
+    readKey: process.env.COSMIC_READ_KEY as string,
+    apiEnvironment: 'staging'
 })
 
 // Helper function for error handling
 function hasStatus(error: unknown): error is { status: number } {
-  return typeof error === 'object' && error !== null && 'status' in error;
+    return typeof error === 'object' && error !== null && 'status' in error;
 }
 
 // Fetch all services
 export async function getServices() {
-  try {
-    const response = await cosmic.objects
-      .find({ type: 'services' })
-      .props(['id', 'title', 'slug', 'metadata'])
-      .depth(1);
-    return response.objects;
-  } catch (error) {
-    if (hasStatus(error) && error.status === 404) {
-      return [];
+    try {
+      const response = await cosmic.objects
+        .find({ type: 'services' })
+        .props(['id', 'title', 'slug', 'metadata'])
+        .depth(1);
+      return response.objects;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return [];
+      }
+      throw new Error('Failed to fetch services');
     }
-    throw new Error('Failed to fetch services');
-  }
 }
 
 // Fetch single service by slug
 export async function getServiceBySlug(slug: string) {
-  try {
-    const response = await cosmic.objects
-      .findOne({ type: 'services', slug })
-      .props(['id', 'title', 'slug', 'metadata'])
-      .depth(1);
-    return response.object;
-  } catch (error) {
-    if (hasStatus(error) && error.status === 404) {
-      return null;
+    try {
+      const response = await cosmic.objects
+        .findOne({ type: 'services', slug })
+        .props(['id', 'title', 'slug', 'metadata'])
+        .depth(1);
+      return response.object;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return null;
+      }
+      throw new Error('Failed to fetch service');
     }
-    throw new Error('Failed to fetch service');
-  }
 }
 
 // Fetch all team members
 export async function getTeamMembers() {
-  try {
-    const response = await cosmic.objects
-      .find({ type: 'team-members' })
-      .props(['id', 'title', 'slug', 'metadata'])
-      .depth(1);
-    return response.objects;
-  } catch (error) {
-    if (hasStatus(error) && error.status === 404) {
-      return [];
+    try {
+      const response = await cosmic.objects
+        .find({ type: 'team-members' })
+        .props(['id', 'title', 'slug', 'metadata'])
+        .depth(1);
+      return response.objects;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return [];
+      }
+      throw new Error('Failed to fetch team members');
     }
-    throw new Error('Failed to fetch team members');
-  }
 }
 
 // Fetch all testimonials
 export async function getTestimonials() {
-  try {
-    const response = await cosmic.objects
-      .find({ type: 'testimonials' })
-      .props(['id', 'title', 'slug', 'metadata'])
-      .depth(1);
-    return response.objects;
-  } catch (error) {
-    if (hasStatus(error) && error.status === 404) {
-      return [];
+    try {
+      const response = await cosmic.objects
+        .find({ type: 'testimonials' })
+        .props(['id', 'title', 'slug', 'metadata'])
+        .depth(1);
+      return response.objects;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return [];
+      }
+      throw new Error('Failed to fetch testimonials');
     }
-    throw new Error('Failed to fetch testimonials');
-  }
 }
 
 // Fetch all case studies
 export async function getCaseStudies() {
-  try {
-    const response = await cosmic.objects
-      .find({ type: 'case-studies' })
-      .props(['id', 'title', 'slug', 'metadata'])
-      .depth(1);
-    return response.objects;
-  } catch (error) {
-    if (hasStatus(error) && error.status === 404) {
-      return [];
+    try {
+      const response = await cosmic.objects
+        .find({ type: 'case-studies' })
+        .props(['id', 'title', 'slug', 'metadata'])
+        .depth(1);
+      return response.objects;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return [];
+      }
+      throw new Error('Failed to fetch case studies');
     }
-    throw new Error('Failed to fetch case studies');
-  }
 }
 
 // Fetch single case study by slug
 export async function getCaseStudyBySlug(slug: string) {
-  try {
-    const response = await cosmic.objects
-      .findOne({ type: 'case-studies', slug })
-      .props(['id', 'title', 'slug', 'metadata'])
-      .depth(1);
-    return response.object;
-  } catch (error) {
-    if (hasStatus(error) && error.status === 404) {
-      return null;
+    try {
+      const response = await cosmic.objects
+        .findOne({ type: 'case-studies', slug })
+        .props(['id', 'title', 'slug', 'metadata'])
+        .depth(1);
+      return response.object;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return null;
+      }
+      throw new Error('Failed to fetch case study');
     }
-    throw new Error('Failed to fetch case study');
-  }
 }
 
 // Fetch about page content
 export async function getAboutPage() {
-  try {
-    const response = await cosmic.objects
-      .findOne({ type: 'about-pages' })
-      .props(['id', 'title', 'slug', 'metadata'])
-      .depth(1);
-    return response.object;
-  } catch (error) {
-    if (hasStatus(error) && error.status === 404) {
-      return null;
+    try {
+      const response = await cosmic.objects
+        .findOne({ type: 'about-pages' })
+        .props(['id', 'title', 'slug', 'metadata'])
+        .depth(1);
+      return response.object;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return null;
+      }
+      throw new Error('Failed to fetch about page');
     }
-    throw new Error('Failed to fetch about page');
-  }
 }
 
 // Fetch all categories
 export async function getCategories() {
-  try {
-    const response = await cosmic.objects
-      .find({ type: 'categories' })
-      .props(['id', 'title', 'slug', 'metadata'])
-      .depth(1);
-    return response.objects;
-  } catch (error) {
-    if (hasStatus(error) && error.status === 404) {
-      return [];
+    try {
+      const response = await cosmic.objects
+        .find({ type: 'categories' })
+        .props(['id', 'title', 'slug', 'metadata'])
+        .depth(1);
+      return response.objects;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return [];
+      }
+      throw new Error('Failed to fetch categories');
     }
-    throw new Error('Failed to fetch categories');
-  }
 }
 
 // Fetch all products
 export async function getProducts() {
-  try {
-    const response = await cosmic.objects
-      .find({ type: 'products' })
-      .props(['id', 'title', 'slug', 'metadata'])
-      .depth(1);
-    return response.objects;
-  } catch (error) {
-    if (hasStatus(error) && error.status === 404) {
-      return [];
+    try {
+      const response = await cosmic.objects
+        .find({ type: 'products' })
+        .props(['id', 'title', 'slug', 'metadata'])
+        .depth(1);
+      return response.objects;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return [];
+      }
+      throw new Error('Failed to fetch products');
     }
-    throw new Error('Failed to fetch products');
-  }
 }
 
 // Fetch products by category
 export async function getProductsByCategory(categoryId: string) {
-  try {
-    const response = await cosmic.objects
-      .find({ type: 'products', 'metadata.category': categoryId })
-      .props(['id', 'title', 'slug', 'metadata'])
-      .depth(1);
-    return response.objects;
-  } catch (error) {
-    if (hasStatus(error) && error.status === 404) {
-      return [];
+    try {
+      const response = await cosmic.objects
+        .find({ type: 'products', 'metadata.category': categoryId })
+        .props(['id', 'title', 'slug', 'metadata'])
+        .depth(1);
+      return response.objects;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return [];
+      }
+      throw new Error('Failed to fetch products by category');
     }
-    throw new Error('Failed to fetch products by category');
-  }
 }
 
 // Fetch single product by slug
 export async function getProductBySlug(slug: string) {
-  try {
-    const response = await cosmic.objects
-      .findOne({ type: 'products', slug })
-      .props(['id', 'title', 'slug', 'metadata'])
-      .depth(1);
-    return response.object;
-  } catch (error) {
-    if (hasStatus(error) && error.status === 404) {
-      return null;
+    try {
+      const response = await cosmic.objects
+        .findOne({ type: 'products', slug })
+        .props(['id', 'title', 'slug', 'metadata'])
+        .depth(1);
+      return response.object;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return null;
+      }
+      throw new Error('Failed to fetch product');
     }
-    throw new Error('Failed to fetch product');
-  }
+}
+
+// Fetch all blog posts
+export async function getBlogPosts() {
+    try {
+      const response = await cosmic.objects
+        .find({ type: 'blog-posts' })
+        .props(['id', 'title', 'slug', 'status', 'metadata', 'created_at'])
+        .depth(1);
+      
+      // Sort by publish_date or created_at, newest first
+      const posts = response.objects.sort((a: any, b: any) => {
+        const dateA = new Date(a.metadata?.publish_date || a.created_at).getTime();
+        const dateB = new Date(b.metadata?.publish_date || b.created_at).getTime();
+        return dateB - dateA;
+      });
+      
+      return posts;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return [];
+      }
+      throw new Error('Failed to fetch blog posts');
+    }
+}
+
+// Fetch published blog posts only
+export async function getPublishedBlogPosts() {
+    try {
+      const response = await cosmic.objects
+        .find({ type: 'blog-posts', status: 'published' })
+        .props(['id', 'title', 'slug', 'status', 'metadata', 'created_at'])
+        .depth(1);
+      
+      // Sort by publish_date or created_at, newest first
+      const posts = response.objects.sort((a: any, b: any) => {
+        const dateA = new Date(a.metadata?.publish_date || a.created_at).getTime();
+        const dateB = new Date(b.metadata?.publish_date || b.created_at).getTime();
+        return dateB - dateA;
+      });
+      
+      return posts;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return [];
+      }
+      throw new Error('Failed to fetch published blog posts');
+    }
+}
+
+// Fetch single blog post by slug
+export async function getBlogPostBySlug(slug: string) {
+    try {
+      const response = await cosmic.objects
+        .findOne({ type: 'blog-posts', slug })
+        .props(['id', 'title', 'slug', 'status', 'metadata', 'created_at'])
+        .depth(1);
+      return response.object;
+    } catch (error) {
+      if (hasStatus(error) && error.status === 404) {
+        return null;
+      }
+      throw new Error('Failed to fetch blog post');
+    }
 }
 
 // Create order (server-side only)
 export async function createOrder(orderData: {
-  order_number: string;
-  customer_email: string;
-  customer_name: string;
-  shipping_address: string;
-  shipping_city: string;
-  shipping_state: string;
-  shipping_zip: string;
-  order_items: Array<{
-    product_id: string;
-    product_name: string;
-    quantity: number;
-    price: number;
-  }>;
-  subtotal: number;
-  tax: number;
-  shipping: number;
-  total: number;
-  status: string;
-  stripe_payment_intent_id?: string;
-  order_date: string;
+    order_number: string;
+    customer_email: string;
+    customer_name: string;
+    shipping_address: string;
+    shipping_city: string;
+    shipping_state: string;
+    shipping_zip: string;
+    order_items: Array<{
+      product_id: string;
+      product_name: string;
+      quantity: number;
+      price: number;
+    }>;
+    subtotal: number;
+    tax: number;
+    shipping: number;
+    total: number;
+    status: string;
+    stripe_payment_intent_id?: string;
+    order_date: string;
 }) {
-  const writeClient = createBucketClient({
-    bucketSlug: process.env.COSMIC_BUCKET_SLUG as string,
-    readKey: process.env.COSMIC_READ_KEY as string,
-    writeKey: process.env.COSMIC_WRITE_KEY as string,
-    apiEnvironment: 'staging'
-  });
-
-  try {
-    const response = await writeClient.objects.insertOne({
-      title: `Order ${orderData.order_number}`,
-      type: 'orders',
-      metadata: orderData
+    const writeClient = createBucketClient({
+      bucketSlug: process.env.COSMIC_BUCKET_SLUG as string,
+      readKey: process.env.COSMIC_READ_KEY as string,
+      writeKey: process.env.COSMIC_WRITE_KEY as string,
+      apiEnvironment: 'staging'
     });
-    return response.object;
-  } catch (error) {
-    throw new Error('Failed to create order');
-  }
+
+    try {
+      const response = await writeClient.objects.insertOne({
+        title: `Order ${orderData.order_number}`,
+        type: 'orders',
+        metadata: orderData
+      });
+      return response.object;
+    } catch (error) {
+      throw new Error('Failed to create order');
+    }
 }
